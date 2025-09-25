@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extension Test Page</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .test-section {
+            background: #f8f9fa;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border: 1px solid #e1e5e9;
+        }
+        .success { color: #10b981; }
+        .error { color: #ef4444; }
+        .warning { color: #f59e0b; }
+        code {
+            background: #e5e7eb;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        .step {
+            margin: 10px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 6px;
+            border-left: 4px solid #6366f1;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Obsidian Tweet Saver Extension Test</h1>
+    
+    <div class="test-section">
+        <h2>📋 Pre-Test Checklist</h2>
+        <div class="step">
+            <strong>1. Obsidian Setup:</strong>
+            <ul>
+                <li>✅ Obsidian is running</li>
+                <li>✅ Local REST API plugin is installed and enabled</li>
+                <li>✅ API is accessible at <code>http://localhost:27123</code></li>
+            </ul>
+        </div>
+        
+        <div class="step">
+            <strong>2. Extension Setup:</strong>
+            <ul>
+                <li>✅ Extension is loaded in Chrome (chrome://extensions/)</li>
+                <li>✅ Extension icon appears in browser toolbar</li>
+                <li>✅ Extension popup opens when clicked</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>🔗 Connection Test</h2>
+        <p>Click the extension icon and test the Obsidian connection:</p>
+        <div class="step">
+            <strong>Expected Result:</strong> "✅ Connected to Obsidian successfully!"
+        </div>
+        <div class="step">
+            <strong>If Error:</strong> Check that Obsidian is running and Local REST API is enabled
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>🐦 Twitter/X Integration Test</h2>
+        <p>Navigate to Twitter/X and test tweet saving:</p>
+        
+        <div class="step">
+            <strong>1. Go to Twitter/X:</strong>
+            <ul>
+                <li>Visit <a href="https://twitter.com" target="_blank">twitter.com</a> or <a href="https://x.com" target="_blank">x.com</a></li>
+                <li>Navigate to any tweet in timeline</li>
+                <li>Click on a tweet to open tweet detail page (like <a href="https://x.com/MetalBlakedowns/status/1963215696562655466" target="_blank">this example</a>)</li>
+            </ul>
+        </div>
+        
+        <div class="step">
+            <strong>2. Look for Save Button:</strong>
+            <ul>
+                <li>✅ Save button appears next to Like/Retweet buttons in timeline</li>
+                <li>✅ Save button appears next to Bookmark button on tweet detail pages</li>
+                <li>✅ Button has document icon with Obsidian branding</li>
+                <li>✅ Button responds to hover with color change</li>
+                <li>✅ Button shows visual feedback when clicked</li>
+            </ul>
+        </div>
+        
+        <div class="step">
+            <strong>3. Test Saving Methods:</strong>
+            <ul>
+                <li><strong>Click Save Button:</strong> Click the save button next to a tweet</li>
+                <li><strong>Keyboard Shortcut:</strong> Press <code>Cmd+Shift+S</code> (Mac) or <code>Ctrl+Shift+S</code> (Windows/Linux)</li>
+                <li><strong>Context Menu:</strong> Right-click on page and select "Save Tweet to Obsidian"</li>
+            </ul>
+        </div>
+        
+        <div class="step">
+            <strong>4. Expected Results:</strong>
+            <ul>
+                <li>✅ Success notification appears: "Saved to Obsidian!"</li>
+                <li>✅ Note is created in Obsidian vault under <code>tweets/</code> folder</li>
+                <li>✅ Note contains tweet URL, author, and timestamp</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>📝 Note Format Test</h2>
+        <p>Check the saved note in Obsidian:</p>
+        <div class="step">
+            <strong>Expected Note Format:</strong>
+            <pre>
+# Tweet Saved
+
+**URL:** https://twitter.com/user/status/123456789
+**Author:** @username
+**Saved:** 1/15/2024, 2:30:45 PM
+
+---
+
+*Saved via Obsidian Tweet Saver Extension*
+            </pre>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>🚨 Error Handling Test</h2>
+        <p>Test error scenarios:</p>
+        
+        <div class="step">
+            <strong>1. Obsidian Not Running:</strong>
+            <ul>
+                <li>Close Obsidian</li>
+                <li>Try to save a tweet</li>
+                <li>✅ Should show error message about connection</li>
+            </ul>
+        </div>
+        
+        <div class="step">
+            <strong>2. Non-Twitter Page:</strong>
+            <ul>
+                <li>Navigate to a non-Twitter page</li>
+                <li>Try keyboard shortcut</li>
+                <li>✅ Should not trigger save action</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>✅ Test Results</h2>
+        <p>Mark completed tests:</p>
+        <ul>
+            <li>☐ Extension loads without errors</li>
+            <li>☐ Obsidian connection test passes</li>
+            <li>☐ Save button appears on tweets</li>
+            <li>☐ Click save button works</li>
+            <li>☐ Keyboard shortcut works</li>
+            <li>☐ Context menu works</li>
+            <li>☐ Notes are created in Obsidian</li>
+            <li>☐ Note format is correct</li>
+            <li>☐ Error handling works</li>
+        </ul>
+    </div>
+
+    <div class="test-section">
+        <h2>🔧 Troubleshooting</h2>
+        <div class="step">
+            <strong>Common Issues:</strong>
+            <ul>
+                <li><strong>Save button not appearing:</strong> Refresh the Twitter/X page</li>
+                <li><strong>Connection failed:</strong> Check Obsidian is running and Local REST API is enabled</li>
+                <li><strong>Keyboard shortcut not working:</strong> Make sure you're on a Twitter/X page</li>
+                <li><strong>Notes not saving:</strong> Check Obsidian vault permissions and API settings</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #e1e5e9; color: #6b7280;">
+        <p>This test page helps verify that the Obsidian Tweet Saver extension is working correctly.</p>
+    </footer>
+</body>
+</html>

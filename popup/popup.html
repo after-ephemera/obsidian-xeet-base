@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Obsidian Tweet Saver</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="logo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/>
+        </svg>
+        <h1>Obsidian Tweet Saver</h1>
+      </div>
+    </header>
+
+    <main class="main">
+      <div id="status" class="status hidden"></div>
+      
+      <div class="section">
+        <h3>Configuration</h3>
+        <div class="form-group">
+          <label for="apiKey">API Key:</label>
+          <input type="password" id="apiKey" class="form-control" placeholder="Enter your Obsidian API key">
+          <small class="help-text">Get this from Obsidian Settings > Core plugins > Local REST API</small>
+        </div>
+        <div class="form-group">
+          <label for="baseUrl">Server URL:</label>
+          <input type="text" id="baseUrl" class="form-control" placeholder="http://localhost:27123">
+          <small class="help-text">Default: http://localhost:27123</small>
+        </div>
+        <button id="saveConfig" class="btn btn-primary">
+          <span class="btn-text">Save Configuration</span>
+          <span class="btn-spinner hidden">Saving...</span>
+        </button>
+      </div>
+
+      <div class="section">
+        <h3>Connection</h3>
+        <button id="testConnection" class="btn btn-primary">
+          <span class="btn-text">Test Obsidian Connection</span>
+          <span class="btn-spinner hidden">Testing...</span>
+        </button>
+        <p class="help-text">Make sure Obsidian is running with Local REST API enabled</p>
+      </div>
+
+      <div class="section">
+        <h3>Settings</h3>
+        <div class="form-group">
+          <label for="baseSelect">Default Base:</label>
+          <select id="baseSelect" class="form-control">
+            <option value="default">Default</option>
+          </select>
+        </div>
+        <button id="refreshBases" class="btn btn-secondary">Refresh Bases</button>
+      </div>
+
+      <div class="section">
+        <h3>Current Page</h3>
+        <div id="currentPageInfo" class="page-info">
+          <p>Navigate to a tweet to save it</p>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="shortcuts">
+        <span class="shortcut">⌘+Shift+Y</span>
+        <span class="shortcut-label">Save tweet</span>
+      </div>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
