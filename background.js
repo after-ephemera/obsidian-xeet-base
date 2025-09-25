@@ -42,13 +42,12 @@ title: ${fileName}
 tags: [xeet, saved-xeet, new-music]
 created: ${timestamp}
 listened: false
+url: ${tweetData.url}
+author: ${tweetData.author}
+content: ${tweetData.tweetContent.replace(/\n/g, ' ').replace(/\:/g, '')}
 ---
 
-# Tweet Saved
-
-**URL:** ${tweetData.url}
-**Author:** ${tweetData.author || 'Unknown'}
-**Saved:** ${timestamp}
+${tweetData.tweetContent}
 
 ---
 
@@ -58,7 +57,7 @@ listened: false
   generateFileName(tweetData) {
     // Extract tweet ID from URL or use timestamp
     const urlParts = tweetData.url.split('/');
-    const tweetId = urlParts[urlParts.length - 1];
+    const tweetId = urlParts[urlParts.length - 1].split('?')[0];
     const author = tweetData.author
       ? tweetData.author.replace(/[^a-zA-Z0-9]/g, '_')
       : 'unknown';

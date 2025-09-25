@@ -105,6 +105,11 @@ class TweetDetector {
     const actionBar = document.querySelector('[role="group"]');
     const shareButton = document.querySelector('[data-testid="share"]');
 
+    // Hide the default bookmark button
+    if (bookmarkButton) {
+      bookmarkButton.style.display = 'none';
+    }
+
     const tryInsertInto = (container, afterNode = null) => {
       if (!container) return false;
       if (container.querySelector('.obsidian-save-button')) return true;
@@ -117,6 +122,7 @@ class TweetDetector {
       return true;
     };
 
+    // Try to replace the bookmark button position
     if (bookmarkButton && bookmarkButton.parentElement) {
       if (tryInsertInto(bookmarkButton.parentElement, bookmarkButton)) return;
     }
@@ -140,11 +146,28 @@ class TweetDetector {
     const actionBar = tweetElement.querySelector('[role="group"]');
     if (!actionBar) return;
 
+    // Hide the default bookmark button
+    const bookmarkButton = tweetElement.querySelector(
+      '[data-testid="bookmark"]'
+    );
+    if (bookmarkButton) {
+      bookmarkButton.style.display = 'none';
+    }
+
     // Check if save button already exists
     if (actionBar.querySelector('.obsidian-save-button')) return;
 
     // Create save button
     const saveButton = this.createSaveButton();
+
+    // Try to replace the bookmark button position first
+    if (bookmarkButton && bookmarkButton.parentElement) {
+      bookmarkButton.parentElement.insertBefore(
+        saveButton,
+        bookmarkButton.nextSibling
+      );
+      return;
+    }
 
     // Insert before the last element (usually the share button)
     const lastChild = actionBar.lastElementChild;
@@ -179,33 +202,13 @@ class TweetDetector {
       margin: 0 4px;
     `;
 
-    // Create SVG icon
-    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    svg.setAttribute('width', '18');
-    svg.setAttribute('height', '18');
-    svg.setAttribute('viewBox', '0 0 24 24');
-    svg.setAttribute('fill', 'currentColor');
-
-    const path1 = document.createElementNS(
-      'http://www.w3.org/2000/svg',
-      'path'
-    );
-    path1.setAttribute(
-      'd',
-      'M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z'
-    );
-
-    const path2 = document.createElementNS(
-      'http://www.w3.org/2000/svg',
-      'path'
-    );
-    path2.setAttribute(
-      'd',
-      'M12,11A3,3 0 0,0 9,14A3,3 0 0,0 12,17A3,3 0 0,0 15,14A3,3 0 0,0 12,11M12,15A1,1 0 0,1 11,14A1,1 0 0,1 12,13A1,1 0 0,1 13,14A1,1 0 0,1 12,15Z'
-    );
-
-    svg.appendChild(path1);
-    svg.appendChild(path2);
+    const svg = document.createElement('div');
+    svg.innerHTML = `
+      <svg width="24" height="24" viewBox="0 0 512 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <rect fill="#252323" width="512" height="512" rx="100"/>
+        <path d="M359.9 434.3c-2.6 19.1-21.3 34-40 28.9-26.4-7.3-57-18.7-84.7-20.8l-42.3-3.2a27.9 27.9 0 0 1-18-8.4l-73-75a27.9 27.9 0 0 1-5.4-31s45.1-99 46.8-104.2c1.7-5.1 7.8-50 11.4-74.2a28 28 0 0 1 9-16.6l86.2-77.5a28 28 0 0 1 40.6 3.5l72.5 92a29.7 29.7 0 0 1 6.2 18.3c0 17.4 1.5 53.2 11.1 76.3a303 303 0 0 0 35.6 58.5 14 14 0 0 1 1.1 15.7c-6.4 10.8-18.9 31.4-36.7 57.9a143.3 143.3 0 0 0-20.4 59.8Z" fill="#8adb8f"/>
+      </svg>
+    `;
 
     // Create indicator dot
     const indicator = document.createElement('div');
@@ -280,6 +283,9 @@ class TweetDetector {
       author,
       timestamp: new Date().toISOString(),
       pageTitle: document.title,
+      tweetContent: document
+        .querySelector('[data-testid="tweetText"]')
+        .textContent.trim(),
     };
   }
 
@@ -357,6 +363,11 @@ class TweetDetector {
 const addStyles = () => {
   const style = document.createElement('style');
   style.textContent = `
+    /* Hide the default bookmark button */
+    [data-testid="bookmark"] {
+      display: none !important;
+    }
+    
     .obsidian-save-button {
       display: inline-flex;
       align-items: center;
