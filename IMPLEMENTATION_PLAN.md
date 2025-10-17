@@ -458,3 +458,8 @@ describe('ObsidianAPI', () => {
 ### 12. Conclusion
 
 This implementation plan provides a structured approach to building the Obsidian Tweet Saver Chrome extension. By following this phased approach, we can deliver a working MVP quickly while building a foundation for future enhancements. The plan emphasizes testing, error handling, and user experience throughout the development process.
+
+## Other future work
+
+- enable multiple add-on buttons for saving various types of content/to different bases
+- fetch from obsidian when loading the page to determine if content has already been saved, and make saving idempotent where content can't be saved more than once
